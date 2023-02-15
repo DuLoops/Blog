@@ -49,7 +49,7 @@ export default function Contact() {
   const [alert, setAlert] = useState(false);
   const { colorMode } = useColorMode();
 
-  const handleChange = (event: any) => {
+  const handleChange = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
@@ -61,7 +61,7 @@ export default function Contact() {
     setForm({ ...form, about: "other" });
   };
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
     setLoading(true);
     emailjs
