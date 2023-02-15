@@ -42,22 +42,18 @@ const Nav = () => {
             <Connect />
           </Box>
         )}
-        <Link href={"/"} position="relative">
-          <Box
-            justifySelf={"center"}
-            gridColumnStart="2"
-            width="55px"
-            height={"55px"}
-            p="5px"
-          >
-            <Image
-              src={"/images/logo/logo.png"}
-              alt="Dujin's logo"
-              fill
-              className="image"
-            />
-          </Box>
-        </Link>
+        <Box justifySelf={"center"} gridColumnStart="2">
+          <Link href={"/"} position="relative">
+            <Box width="55px" height={"55px"} p="5px">
+              <Image
+                src={"/images/logo/logo.png"}
+                alt="Dujin's logo"
+                fill
+                className="image"
+              />
+            </Box>
+          </Link>
+        </Box>
         {isMobile ? (
           <MobileMenu pathname={pathname} />
         ) : (

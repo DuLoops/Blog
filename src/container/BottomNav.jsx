@@ -1,5 +1,4 @@
 import { Box, Center, Flex, Text } from "@chakra-ui/react";
-// import { folderBlog, folderGallery } from "../resources/images/icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
