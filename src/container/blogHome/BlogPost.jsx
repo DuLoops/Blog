@@ -15,7 +15,12 @@ export default function BlogPost(props) {
   const router = useRouter();
   
   const handleClick = () => {
-    router.push(`/blog/${props.post.link}`);
+    if (props.post.link.substring(0, 5) == "https") {
+      window.open(props.post.link, "_blank");
+      return;
+    } else {
+      navigate(props.post.link);
+    }
   };
 
 
