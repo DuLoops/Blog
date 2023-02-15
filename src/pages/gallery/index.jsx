@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 import { Box, useBoolean, useMediaQuery } from "@chakra-ui/react";
-import PhotoViewerModal from "./photoViewerModal";
+import PhotoViewerModal from "@/container/gallery/photoViewerModal";
 import PhotoGrid from "@/container/gallery/PhotoGrid";
 import ScrollToTopBtn from "@/components/general/ScrollToTopBtn";
 import BottomNav from "@/container/BottomNav";

@@ -42,16 +42,27 @@ const Nav = () => {
             <Connect />
           </Box>
         )}
-        <Box justifySelf={"center"} gridColumnStart="2"  width="55px" height={'55px'} p="5px">
-          <Link href={"/"}>
-            <Image src={"/resources/images/logo/logo.png"} alt="Dujin's logo" fill className="image"/>
-          </Link>
-        </Box>
+        <Link href={"/"} position="relative">
+          <Box
+            justifySelf={"center"}
+            gridColumnStart="2"
+            width="55px"
+            height={"55px"}
+            p="5px"
+          >
+            <Image
+              src={"/images/logo/logo.png"}
+              alt="Dujin's logo"
+              fill
+              className="image"
+            />
+          </Box>
+        </Link>
         {isMobile ? (
-          <MobileMenu pathname={pathname}/>
+          <MobileMenu pathname={pathname} />
         ) : (
           <HStack justifySelf="right" my="auto" gridColumnStart={"3"}>
-            <DesktopMenu showToggle={true} pathname={pathname}/>
+            <DesktopMenu showToggle={true} pathname={pathname} />
           </HStack>
         )}
       </Grid>
