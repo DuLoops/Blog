@@ -17,11 +17,8 @@ const settings = {
   slidesToScroll: 1,
 };
 
-interface props {
-  cards: string[]
-}
 
-export default function Carousel(props: props) {
+export default function Carousel(props) {
   // As we have used custom buttons, we need a reference variable to
   // change the state
   const [slider, setSlider] = React.useState<Slider | null>(null);
