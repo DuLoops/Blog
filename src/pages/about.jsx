@@ -62,10 +62,10 @@ export default function About() {
           </Text>
           <Box pos="relative">
             <Box width={{ sm: "100%", md: "400px" }}>
-              <Image src={"/resources/images/dev/laptop.jpg"} alt="my laptop" className="image" fill/>
+              <Image src={"/images/dev/laptop.jpg"} alt="my laptop" className="image" fill/>
             </Box>
             <Box position="absolute" top="5px" right="5px" height="120px">
-              <Image src={'/resources/images/icons/page-me.png'} alt="me" fill className="image"/>
+              <Image src={'/images/icons/page-me.png'} alt="me" fill className="image"/>
             </Box>
           </Box>
         </Center>

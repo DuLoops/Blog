@@ -35,12 +35,12 @@ const Filter = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan1026] = useMediaQuery("(min-width: 1026px)");
   const filters = [
-    ["Adventure", "/resources/images/dev/filter/adventure.jpg"],
-    ["Landscape", "/resources/images/dev/filter/landscape.jpg"],
-    ["Sports", "/resources/images/dev/filter/sports.jpg"],
-    ["Life", "/resources/images/dev/filter/life.jpg"],
-    ["Architecture", "/resources/images/dev/filter/architecture.jpg"],
-    ["Products", "/resources/images/dev/filter/products.jpg"],
+    ["Adventure", "/images/dev/filter/adventure.jpg"],
+    ["Landscape", "/images/dev/filter/landscape.jpg"],
+    ["Sports", "/images/dev/filter/sports.jpg"],
+    ["Life", "/images/dev/filter/life.jpg"],
+    ["Architecture", "/images/dev/filter/architecture.jpg"],
+    ["Products", "/images/dev/filter/products.jpg"],
   ];
 
   return (

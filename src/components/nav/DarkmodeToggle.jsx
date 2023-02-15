@@ -8,8 +8,6 @@ import {
   Center,
 } from "@chakra-ui/react";
 import styled from "styled-components";
-// import sun from "/next.svg";
-// import moon from "/resources/svg/moon.svg";
 
 const DarkmodeLabel = styled.label`
   width: 60px;
@@ -61,7 +59,7 @@ const DarkmodeToggle = (props) => {
       />
       <DarkmodeLabel htmlFor="darkmode-toggle">
         <Image
-          src="/resources/svg/sun.svg"
+          src="/svg/sun.svg"
           alt="sun"
           position={"absolute"}
           w="20px"
@@ -71,7 +69,7 @@ const DarkmodeToggle = (props) => {
         />
 
         <Image
-          src={"/resources/svg/moon.svg"}
+          src={"/svg/moon.svg"}
           alt="moon"
           position={"absolute"}
           w="23px"

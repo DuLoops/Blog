@@ -53,7 +53,7 @@ export default function BottomNav(props) {
         p="3px"
         onClick={()=>router.push("/")}
       >
-          <Image src={"/resources/images/icons/blog.png"} alt="Blog" width={50} height={50} />
+          <Image src={"/images/icons/blog.png"} alt="Blog" width={50} height={50} />
           <Text ml="10px">
             <i>Blog</i>
           </Text>
@@ -67,7 +67,7 @@ export default function BottomNav(props) {
         p="5px"
         onClick={()=>router.push("/gallery")}
       >
-        <Image src={"/resources/images/icons/gallery.png"} alt="Gallery" width={50} height={50} />
+        <Image src={"/images/icons/gallery.png"} alt="Gallery" width={50} height={50} />
         <Text ml="10px">
           <i>Gallery</i>
         </Text>
