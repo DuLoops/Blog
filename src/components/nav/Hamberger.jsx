@@ -14,7 +14,7 @@ const path02Variants = {
   closed: { d: "M20 20.5, L50 20.5 " },
 };
 
-const Hamberger = (props: any) => {
+const Hamberger = (props) => {
   const [isHover, setHover] = useState(false);
   const { colorMode, toggleColorMode } = useColorMode()
 
