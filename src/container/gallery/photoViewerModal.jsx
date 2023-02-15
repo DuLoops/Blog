@@ -7,6 +7,7 @@ import PhotoDetail from "@/components/gallery/PhotoDetail";
 import { useRouter } from "next/router";
 
 const PhotoViewerModal = (props) => {
+  // const gaEventTracker = useAnalyticsEventTracker("gallery-modal");
 
   const swiperRef = useRef();
   const router = useRouter();
