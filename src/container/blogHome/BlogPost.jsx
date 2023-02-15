@@ -19,7 +19,7 @@ export default function BlogPost(props) {
       window.open(props.post.link, "_blank");
       return;
     } else {
-      navigate(props.post.link);
+      router.push(`/blog/${props.post.link}`);
     }
   };
 
