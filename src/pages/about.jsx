@@ -70,7 +70,7 @@ export default function About() {
           </Box>
         </Center>
         <Text fontSize="xl" mt="50px" fontStyle={"italic"}>
-        &aposI use this website to <b>Document</b> and <b>Share</b>
+        &apos;I use this website to <b>Document</b> and <b>Share</b>
         </Text>
         <Flex>
           my
