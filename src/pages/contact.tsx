@@ -1,5 +1,4 @@
 import Nav from "../container/Nav";
-import { logo, logoTop, logoBottom } from "../resources/images/logo";
 import ContactForm from "@/container/ContactForm";
 import { Box, Center, useColorMode } from "@chakra-ui/react";
 import Head from "next/head";

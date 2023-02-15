@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-import logo from "@/resources/images/logo/logo.png";
 import MobileMenu from "../components/nav/MobileMenu";
 import { useRouter } from "next/router";
 
@@ -45,7 +44,7 @@ const Nav = () => {
         )}
         <Box justifySelf={"center"} gridColumnStart="2"  width="55px" height={'55px'} p="5px">
           <Link href={"/"}>
-            <Image src={logo} alt="Dujin's logo"  />
+            <Image src={"/resources/images/logo/logo.png"} alt="Dujin's logo" fill className="image"/>
           </Link>
         </Box>
         {isMobile ? (

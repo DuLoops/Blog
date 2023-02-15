@@ -18,14 +18,14 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import { VscOpenPreview } from "react-icons/vsc";
-import {
-  adventure,
-  landscape,
-  sports,
-  life,
-  architecture,
-  products,
-} from "../../resources/images/dev/filter";
+// import {
+//   adventure,
+//   landscape,
+//   sports,
+//   life,
+//   architecture,
+//   products,
+// } from "/resources/images/dev/filter";
 
 const addNumber =(a, b) => {
   
@@ -35,12 +35,12 @@ const Filter = (props) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLargerThan1026] = useMediaQuery("(min-width: 1026px)");
   const filters = [
-    ["Adventure", adventure],
-    ["Landscape", landscape],
-    ["Sports", sports],
-    ["Life", life],
-    ["Architecture", architecture],
-    ["Products", products],
+    ["Adventure", "/resources/images/dev/filter/adventure.jpg"],
+    ["Landscape", "/resources/images/dev/filter/landscape.jpg"],
+    ["Sports", "/resources/images/dev/filter/sports.jpg"],
+    ["Life", "/resources/images/dev/filter/life.jpg"],
+    ["Architecture", "/resources/images/dev/filter/architecture.jpg"],
+    ["Products", "/resources/images/dev/filter/products.jpg"],
   ];
 
   return (

@@ -13,8 +13,6 @@ import { useState, useEffect } from "react";
 import { MdLinkedCamera } from "react-icons/md";
 import { GiBookCover } from "react-icons/gi";
 import { AiFillCodeSandboxCircle } from "react-icons/ai";
-import { PageMe } from "../resources/images/icons";
-import laptop from "@/resources/images/dev/laptop.jpg";
 import Nav from "../container/Nav";
 import Image from "next/image";
 import Head from "next/head";
@@ -64,15 +62,15 @@ export default function About() {
           </Text>
           <Box pos="relative">
             <Box width={{ sm: "100%", md: "400px" }}>
-              <Image src={laptop} alt="my laptop" />
+              <Image src={"/resources/images/dev/laptop.jpg"} alt="my laptop" className="image" fill/>
             </Box>
             <Box position="absolute" top="5px" right="5px" height="120px">
-              <Image src={PageMe} alt="me" height={100} />
+              <Image src={'/resources/images/icons/page-me.png'} alt="me" fill className="image"/>
             </Box>
           </Box>
         </Center>
         <Text fontSize="xl" mt="50px" fontStyle={"italic"}>
-          “I use this website to <b>Document</b> and <b>Share</b>
+        &aposI use this website to <b>Document</b> and <b>Share</b>
         </Text>
         <Flex>
           my
@@ -80,7 +78,7 @@ export default function About() {
             {" "}
             {purpose[purposeIndex].name}
           </Text>
-          "
+          &apos
         </Flex>
         <Icon as={purpose[purposeIndex].icon} w="150px" h="150px" />
       </Flex>

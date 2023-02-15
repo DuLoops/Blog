@@ -1,9 +1,9 @@
 import { HStack, Button, useColorMode, Link } from "@chakra-ui/react";
-import sun from "../../resources/svg/sun.svg";
-import moon from "../../resources/svg/moon.svg";
-import moon2 from "../../resources/svg/moon2.svg";
-import Image from "next/image";
-import style from "@/styles/Nav.module.css";
+// import sun from "../../resources/svg/sun.svg";
+// import moon from "../../resources/svg/moon.svg";
+// import moon2 from "../../resources/svg/moon2.svg";
+// import Image from "next/image";
+// import style from "@/styles/Nav.module.css";
 
 const DesktopMenu = (props) => {
   const { colorMode, toggleColorMode } = useColorMode();

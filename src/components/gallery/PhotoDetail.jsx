@@ -1,16 +1,12 @@
 import {
   Box,
-  CloseButton,
   Heading,
   Link,
   Text,
   Flex,
-  Icon,
-  Tooltip,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import getLocation from "@/utils/getGoogleMapsLocation";
-import { AiFillCamera } from "react-icons/ai";
+import getLocation from "@/lib/getGoogleMapsLocation";
 const PhotoDetail = (props) => {
   const [locationInfo, setLocationInfo] = useState();
   useEffect(() => {
@@ -25,12 +21,11 @@ const PhotoDetail = (props) => {
 
   return (
     <Box
-      // bg="whiteAlpha.100"
       width={"70vw"}
-      h="14vh"
+      h={"14vh"}
       position={"absolute"}
       bottom={{ sm: "180px", md: "0" }}
-      left="50%"
+      left={"50%"}
       transform={"translate(-50%, 0)"}
       borderRadius={"5px 5px 0 0 "}
       textAlign="center"
@@ -38,28 +33,28 @@ const PhotoDetail = (props) => {
       zIndex={10}
     >
       <Flex
-        flexDir="column"
+        flexDir={"column"}
         justifyContent={"space-around"}
-        h="14vh"
-        color="white"
+        h={"14vh"}
+        color={"white"}
       >
-        <Heading fontSize="2xl" as="b" fontFamily={"Poiret One"}>
+        <Heading fontSize={"2xl"} as={"b"} fontFamily={"Poiret One"}>
           {props.photo.title}
         </Heading>
         {(props.photo.desc || locationInfo) && (
           <Flex justifyContent={"center"} gap="2rem">
             {props.photo.desc && (
-              <Text fontSize={"md"}>"{props.photo.desc}"</Text>
+              <Text fontSize={"md"}>&quot;{props.photo.desc}&quot;</Text>
             )}
             {locationInfo && (
               <Text>
                 Location:
                 <Link
-                  fontSize="md"
-                  ml="0.5rem"
+                  fontSize={"md"}
+                  ml={"0.5rem"}
                   href={locationInfo.link}
                   isExternal
-                  color="blue.300"
+                  color={"blue.300"}
                   textDecor={"underline"}
                   fontStyle="italic"
                   _hover={{ textDecor: "none" }}

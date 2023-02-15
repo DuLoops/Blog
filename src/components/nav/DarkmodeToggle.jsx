@@ -7,10 +7,9 @@ import {
   Box,
   Center,
 } from "@chakra-ui/react";
-import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import sun from "../../resources/svg/sun.svg";
-import moon from "../../resources/svg/moon.svg";
+// import sun from "/next.svg";
+// import moon from "/resources/svg/moon.svg";
 
 const DarkmodeLabel = styled.label`
   width: 60px;
@@ -62,7 +61,7 @@ const DarkmodeToggle = (props) => {
       />
       <DarkmodeLabel htmlFor="darkmode-toggle">
         <Image
-          src={sun}
+          src="/resources/svg/sun.svg"
           alt="sun"
           position={"absolute"}
           w="20px"
@@ -72,7 +71,7 @@ const DarkmodeToggle = (props) => {
         />
 
         <Image
-          src={moon}
+          src={"/resources/svg/moon.svg"}
           alt="moon"
           position={"absolute"}
           w="23px"

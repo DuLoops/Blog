@@ -1,5 +1,5 @@
 import { Box, Center, Flex, Text } from "@chakra-ui/react";
-import { folderBlog, folderGallery } from "../resources/images/icons";
+// import { folderBlog, folderGallery } from "../resources/images/icons";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
@@ -53,7 +53,7 @@ export default function BottomNav(props) {
         p="3px"
         onClick={()=>router.push("/")}
       >
-          <Image src={folderBlog} alt="Blog" width={50} height={50} />
+          <Image src={"/resources/images/icons/blog.png"} alt="Blog" width={50} height={50} />
           <Text ml="10px">
             <i>Blog</i>
           </Text>
@@ -67,7 +67,7 @@ export default function BottomNav(props) {
         p="5px"
         onClick={()=>router.push("/gallery")}
       >
-        <Image src={folderGallery} alt="Gallery" width={50} height={50} />
+        <Image src={"/resources/images/icons/gallery.png"} alt="Gallery" width={50} height={50} />
         <Text ml="10px">
           <i>Gallery</i>
         </Text>

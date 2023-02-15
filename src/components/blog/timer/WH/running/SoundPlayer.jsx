@@ -1,12 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  breath,
-  exhale,
-  hold,
-  inhale,
-  beginning,
-} from "@/resources/audio/timer";
-import  inhale2  from "@/resources/audio/timer/inhale.mp3";
 export default function SoundPlayer(props) {
   const audioRef = useRef(null);
   const [audio, setAudio] = useState(beginning);
@@ -14,24 +6,24 @@ export default function SoundPlayer(props) {
   useEffect(() => {
     switch (props.sequence) {
       case "ready":
-        setAudio(beginning);
+        setAudio('/resources/audio/timer/beginning.mp3');
         setTimeout(() => {
           audioRef.current.play();
         }, 2000);
         break;
       case "breath":
-        setAudio(breath);
+        setAudio('/resources/audio/timer/breath.mp3');
         break;
       case "exhale":
       case "exhaleLast":
-        setAudio(exhale);
+        setAudio('/resources/audio/timer/exhale.mp3');
         break;
       case "hold":
       case "inhaleHold":
-        setAudio(hold);
+        setAudio('/resources/audio/timer/hold.mp3');
         break;
       case "inhale":
-        setAudio(inhale);
+        setAudio('/resources/audio/timer/inhale.mp3');
         break;
     }
   }, [props.sequence]);

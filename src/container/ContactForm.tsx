@@ -206,7 +206,7 @@ export default function Contact() {
     return (
       <Alert status="error">
         <AlertIcon />
-        <AlertTitle>Message didn't send!</AlertTitle>
+        <AlertTitle>Message didn&apos;t send!</AlertTitle>
         <AlertDescription>Check your internet connection.</AlertDescription>
       </Alert>
     );

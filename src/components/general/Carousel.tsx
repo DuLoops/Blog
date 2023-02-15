@@ -4,9 +4,6 @@ import { Box, IconButton, useBreakpointValue, Image } from '@chakra-ui/react';
 import { BiLeftArrowAlt, BiRightArrowAlt } from 'react-icons/bi';
 // And react-slick as our Carousel Lib
 import Slider from 'react-slick';
-
-import { dnd } from '../../resources/images/dev/portfolio';
-
 // Settings for the slider
 const settings = {
   dots: true,
