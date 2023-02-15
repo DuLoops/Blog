@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.jsx", "src/container/Nav.jsx", "src/components/general/Carousel.jsx", "src/components/nav/Hamberger.jsx", "src/pages/contact.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/index.jsx", "src/container/Nav.jsx", "src/components/general/Carousel.jsx", "src/components/nav/Hamberger.jsx", "src/pages/contact.jsx", "src/container/ContactForm.jsx"],
   "exclude": ["node_modules"]
 }

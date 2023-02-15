@@ -53,7 +53,7 @@ export default function Contact() {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
 
-  const handleRadio = (radioValue: string) => {
+  const handleRadio = (radioValue) => {
     setForm({ ...form, about: radioValue });
   };
 
