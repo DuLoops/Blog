@@ -13,7 +13,6 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 export default function BlogPost(props) {
   const router = useRouter();
-  
   const handleClick = () => {
     if (props.post.link.substring(0, 5) == "https") {
       window.open(props.post.link, "_blank");
@@ -67,7 +66,9 @@ export default function BlogPost(props) {
           </Heading>
           <HStack justifyContent={"flex-end"} float="right">
             {props.post.tags.map((tag, index) => (
-              <Tag colorScheme={"blue"} key={index}>
+              <Tag
+               colorScheme={props.tags.filter(t => t.name === tag)[0].color}
+               key={index}>
                 {tag}
               </Tag>
             ))}
