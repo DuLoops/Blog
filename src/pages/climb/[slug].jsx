@@ -45,7 +45,7 @@ const ClimbBlog = ({ contentID }) => {
           transform={"translate('-50%,-50%')"}
         />
       )}
-      {error && <Text>Can't load the climb at the moment.</Text>}
+      {error && <Text>Cannot load the climb at the moment.</Text>}
       {climbData && (
         <Box>
           <Heading>{climbData.name}</Heading>
