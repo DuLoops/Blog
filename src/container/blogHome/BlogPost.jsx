@@ -15,7 +15,11 @@ export default function BlogPost(props) {
   const router = useRouter();
   const handleClick = () => {
     if (props.post.internalLink) {
-      router.push(props.post.link);
+      const newPath = props.post.link;
+      const currentPath = router.asPath;
+      if (newPath !== currentPath) {
+        router.push(newPath);
+      }
     } else {
       window.open(props.post.link, "_blank");
     }
@@ -49,11 +53,9 @@ export default function BlogPost(props) {
         flexDir={"column"}
         gap="10px"
       >
-        <HStack justifyContent={'space-between'}>
-          <Heading size="md" >
-            {props.post.title}
-          </Heading>
-          <HStack justifyContent={"flex-end"} >
+        <HStack justifyContent={"space-between"}>
+          <Heading size="md">{props.post.title}</Heading>
+          <HStack justifyContent={"flex-end"}>
             {props.post.blog_tags.data.map((tag, index) => (
               <Tag colorScheme={tag.attributes.color} key={index}>
                 {tag.attributes.name}

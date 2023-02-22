@@ -2,11 +2,12 @@ import client from "@/lib/apollo";
 import { gql } from "@apollo/client";
 import { Box, Flex, Heading, Tag, Text, Divider } from "@chakra-ui/react";
 import Nav from "@/container/Nav";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
+import ReactMarkdown from "react-markdown";
 import Head from "next/head";
-import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+
 const Blog = ({ blogProp }) => {
   const blogInfo = blogProp.blog_post.data.attributes;
   return (
@@ -15,7 +16,7 @@ const Blog = ({ blogProp }) => {
         <title>Blog | DuLoops</title>
       </Head>
       <Nav />
-      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem">
+      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb='50px'>
         <Heading m="1rem" size="2xl">
           {blogInfo.title}
         </Heading>
@@ -28,7 +29,9 @@ const Blog = ({ blogProp }) => {
           fill
           className="image"
         />
-        <ReactMarkdown>{blogProp.content}</ReactMarkdown>
+        
+        <ReactMarkdown components={ChakraUIRenderer()} children={blogProp.content} skipHtml/>
+
       </Flex>
     </Box>
   );

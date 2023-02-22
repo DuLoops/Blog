@@ -7,6 +7,8 @@ import Head from "next/head";
 import ReactSyntaxHighlighter from "react-syntax-highlighter";
 import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
+import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+
 const CodingChallenge = ({ challengeData }) => {
   const challengeInfo = challengeData.blog_post.data.attributes;
   return (
@@ -15,7 +17,7 @@ const CodingChallenge = ({ challengeData }) => {
         <title>Coding-Challenge | DuLoops</title>
       </Head>
       <Nav />
-      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem">
+      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb='50px'>
         <Heading m="1rem" size="2xl">
           {challengeInfo.title}
         </Heading>
@@ -36,15 +38,21 @@ const CodingChallenge = ({ challengeData }) => {
           <br />
           Type:{" "}
           {challengeData.tags.data.map((tag, index) => (
-            <Tag key={index} color={tag.attributes.color}>{tag.attributes.type}</Tag>
+            <Tag key={index} color={tag.attributes.color}>
+              {tag.attributes.type}
+            </Tag>
           ))}
         </Text>
         <Divider />
         <Heading as={"h3"}>Problem</Heading>
-        <ReactMarkdown>{challengeData.problem}</ReactMarkdown>
+        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
+          {challengeData.problem}
+        </ReactMarkdown>
         <Divider />
         <Heading as={"h3"}>Solution</Heading>
-        <ReactMarkdown>{challengeData.solution}</ReactMarkdown>
+        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
+          {challengeData.solution}
+        </ReactMarkdown>
         <Divider />
         <Heading as={"h3"}>Code</Heading>
         <Text>Language: {challengeData.codeLanguage}</Text>
