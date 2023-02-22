@@ -58,10 +58,10 @@ const CodingChallenge = ({ blogPostProp }) => {
       </Head>
       <Nav />
       <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
-        <Heading m="1rem" size="2xl">
+        <Heading my="1rem" size="2xl">
           {blogPostProp.title}
         </Heading>
-        <Heading as="h2" size="md">
+        <Heading as="h2" size="md" fontStyle={"italic"}>
           {blogPostProp.description}
         </Heading>
         <Box width={{ sm: "100%", lg: "60%" }} alignSelf={"center"} m="2rem">

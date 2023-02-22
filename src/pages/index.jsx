@@ -77,6 +77,7 @@ const GET_QUERY = gql`
           internalLink
           link
           size
+          contentID
           blog_tags {
             data {
               id

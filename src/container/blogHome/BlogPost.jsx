@@ -16,7 +16,7 @@ export default function BlogPost(props) {
   const handleClick = () => {
     if (props.post.internalLink) {
       let newPath = props.post.link;
-      if (props.postID) {
+      if (props.post.contentID) {
         newPath += `?id=${props.postID}`;
       }
       const currentPath = router.asPath;
