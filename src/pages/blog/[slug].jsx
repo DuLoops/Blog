@@ -6,7 +6,7 @@ import ReactMarkdown from "react-markdown";
 import Head from "next/head";
 import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
-import ChakraUIRenderer from 'chakra-ui-markdown-renderer';
+import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 
 const Blog = ({ blogProp }) => {
   const blogInfo = blogProp.blog_post.data.attributes;
@@ -16,7 +16,7 @@ const Blog = ({ blogProp }) => {
         <title>Blog | DuLoops</title>
       </Head>
       <Nav />
-      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb='50px'>
+      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
         <Heading m="1rem" size="2xl">
           {blogInfo.title}
         </Heading>
@@ -29,9 +29,10 @@ const Blog = ({ blogProp }) => {
           fill
           className="image"
         />
-        
-        <ReactMarkdown components={ChakraUIRenderer()} children={blogProp.content} skipHtml/>
 
+        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
+          {blogProp.content}
+        </ReactMarkdown>
       </Flex>
     </Box>
   );
