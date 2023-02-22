@@ -1,46 +1,42 @@
-import {
-  Box,
-  Flex,
-  Grid,
-  slideFadeConfig,
-  useMediaQuery,
-} from "@chakra-ui/react";
+import { Box, Flex, Grid, GridItem, useMediaQuery } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Nav from "../container/Nav";
 import Filter from "../components/blogHome/Filter";
 import BlogPost from "../container/blogHome/BlogPost";
 import BottomNav from "../container/BottomNav";
 import Head from "next/head";
+import style from "@/styles/blog.module.css";
 
 import { gql } from "@apollo/client";
 import client from "@/lib/apollo";
 const Blog = ({ blogPostsProp, blogTagsProp }) => {
   const [isMobile] = useMediaQuery("(max-width: 980px)");
-  const [blogPosts, setBlogPosts] = useState(blogPostsProp);
-  const [selectedTags, setSelectedTags] = useState([]);
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [selectedTag, setSelectedTag] = useState(null);
 
-  const filterPosts = (blogPosts, selectedTags) => {
-    let sortedPosts = [...blogPosts];
+  useEffect(() => {
+    let sortedPosts = [...blogPostsProp];
     sortedPosts.sort((a, b) => {
       return (
         new Date(b.attributes.modifiedDate) -
         new Date(a.attributes.modifiedDate)
       );
     });
+    setBlogPosts(sortedPosts);
+  }, []);
 
-    if (selectedTags.length === 0) {
-      return sortedPosts;
+  const filterPosts = (blogPosts, selectedTag) => {
+    if (selectedTag == null) {
+      return blogPosts;
     }
-    return sortedPosts.filter((post) => {
-      return selectedTags.every((selectedTag) => {
-        return post.attributes.blog_tags.data.find(
-          (tag) => tag.id === selectedTag
-        );
-      });
+    return blogPosts.filter((post) => {
+      return post.attributes.blog_tags.data.find(
+        (tag) => tag.id === selectedTag
+      );
     });
   };
 
-  const filteredPosts = filterPosts(blogPosts, selectedTags);
+  const filteredPosts = filterPosts(blogPosts, selectedTag);
 
   return (
     <Box minHeight={"100vh"}>
@@ -49,17 +45,25 @@ const Blog = ({ blogPostsProp, blogTagsProp }) => {
         <meta name="description" content="Dujin Kim's personal blog" />
       </Head>
       <Nav />
-      <Filter
-        tags={blogTagsProp}
-        selectedTags={selectedTags}
-        setSelectedTags={setSelectedTags}
-      />
-      <Grid p="10px" gap="10px" gridTemplateColumns={{ lg: "1fr 1fr" }}>
+      <Filter tags={blogTagsProp} tag={selectedTag} setTag={setSelectedTag} />
+      <Flex
+        p="1rem"
+        gap="1rem"
+        rowGap="2rem"
+        flexDir={{ sm: "column", lg: "row" }}
+        flexWrap={{ sm: "nowrap", lg: "wrap" }}
+        justifyContent="space-around"
+      >
         {blogPosts.length > 0 &&
           filteredPosts.map((post, index) => (
-            <BlogPost key={index} post={post.attributes} postID={post.id} />
+            <BlogPost
+              key={index}
+              post={post.attributes}
+              postID={post.id}
+              filtered={selectedTag != null}
+            />
           ))}
-      </Grid>
+      </Flex>
       {isMobile && <BottomNav current="blog" />}
     </Box>
   );

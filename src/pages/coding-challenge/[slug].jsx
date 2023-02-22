@@ -17,6 +17,7 @@ import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 
 const GET_CHALLENGE = gql`
   query getCodingChallenge($id: ID!) {
@@ -37,19 +38,43 @@ const GET_CHALLENGE = gql`
               }
             }
           }
+          blog_post {
+            data {
+              attributes {
+                title
+                description
+                coverImage {
+                  alt
+                  media {
+                    data {
+                      attributes {
+                        url
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 `;
 
-const CodingChallenge = ({ blogPostProp }) => {
+const CodingChallenge = () => {
+  const rounter = useRouter();
+  const { id } = rounter.query;
   const { data, loading, error } = useQuery(GET_CHALLENGE, {
-    variables: { id: blogPostProp.contentID },
+    variables: { id: id },
   });
 
   let challengeData = null;
-  if (!error && data) challengeData = data.codingChallenge.data.attributes;
+  let blogPost = null;
+  if (!error && data) {
+    challengeData = data.codingChallenge.data.attributes;
+    blogPost = data.codingChallenge.data.attributes.blog_post.data.attributes;
+  }
 
   return (
     <Box>
@@ -57,24 +82,24 @@ const CodingChallenge = ({ blogPostProp }) => {
         <title>Coding-Challenge | DuLoops</title>
       </Head>
       <Nav />
-      <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
-        <Heading my="1rem" size="2xl">
-          {blogPostProp.title}
-        </Heading>
-        <Heading as="h2" size="md" fontStyle={"italic"}>
-          {blogPostProp.description}
-        </Heading>
-        <Box width={{ sm: "100%", lg: "60%" }} alignSelf={"center"} m="2rem">
-          <Image
-            src={STRAPI_URL + blogPostProp.coverImage.media.data.attributes.url}
-            alt={blogPostProp.coverImage.alt}
-            fill
-            className="image"
-          />
-        </Box>
-        {loading && <Spinner size="xl" alignSelf={"center"} />}
-        {error && <p>Error loading content. Sorry.</p>}
-        {data && (
+      {loading && <Spinner size="xl" className="center" />}
+      {error && <p>Error loading content. Sorry.</p>}
+      {data && (
+        <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
+          <Heading my="1rem" size="2xl">
+            {blogPost.title}
+          </Heading>
+          <Heading as="h2" size="md" fontStyle={"italic"}>
+            {blogPost.description}
+          </Heading>
+          <Box width={{ sm: "100%", lg: "60%" }} alignSelf={"center"} m="2rem">
+            <Image
+              src={STRAPI_URL + blogPost.coverImage.media.data.attributes.url}
+              alt={blogPost.coverImage.alt}
+              fill
+              className="image"
+            />
+          </Box>
           <Box>
             <Divider my="1rem" />
             <Text>
@@ -106,54 +131,10 @@ const CodingChallenge = ({ blogPostProp }) => {
               {challengeData.code}
             </ReactSyntaxHighlighter>
           </Box>
-        )}
-      </Flex>
+        </Flex>
+      )}
     </Box>
   );
 };
-
-const GET_BLOG_POST = gql`
-  query GetBlogPost($id: ID!) {
-    blogPost(id: $id) {
-      data {
-        attributes {
-          title
-          description
-          contentID
-          coverImage {
-            alt
-            media {
-              data {
-                attributes {
-                  url
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-export async function getServerSideProps(context) {
-  const { id } = context.query;
-  const { error, data } = await client.query({
-    query: GET_BLOG_POST,
-    variables: { id: id },
-  });
-
-  if (error) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: {
-      id: id,
-      blogPostProp: data.blogPost.data.attributes,
-    },
-  };
-}
 
 export default CodingChallenge;

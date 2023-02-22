@@ -16,8 +16,8 @@ export default function BlogPost(props) {
   const handleClick = () => {
     if (props.post.internalLink) {
       let newPath = props.post.link;
-      if (props.post.contentID) {
-        newPath += `?id=${props.postID}`;
+      if (props.post.contentID > 0) {
+        newPath += `?id=${props.post.contentID}`;
       }
       const currentPath = router.asPath;
       if (newPath !== currentPath) {
@@ -28,6 +28,21 @@ export default function BlogPost(props) {
     }
   };
 
+  const getW = () => {
+    if (props.filtered) {
+      return "40%";
+    }
+    switch (props.post.size) {
+      case "s":
+        return "max(300px, 15vw)";
+      case "m":
+        return "max(500px, 40vw)";
+      case "l":
+        return "max(500px, 49vw)";
+      default:
+        return "500px";
+    }
+  };
   return (
     <Flex
       flexDir="column"
@@ -36,11 +51,11 @@ export default function BlogPost(props) {
       gap="5px"
       border="solid 2px rgba(255,255,255,0.1)"
       onClick={handleClick}
-      // maxH="400px"
       justifyContent="space-between"
       overflow={"hidden"}
+      w={{ sm: "100%", lg: getW() }}
     >
-      <Center className="image-container" maxHeight="300px">
+      <Center className="image-container" height="300px" maxW={"100%"}>
         <Image
           src={STRAPI_URL + props.post.coverImage.media.data.attributes.url}
           alt={props.post.coverImage.media.data.attributes.caption}
