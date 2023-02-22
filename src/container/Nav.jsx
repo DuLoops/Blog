@@ -6,11 +6,13 @@ import {
   useColorMode,
   Grid,
   useMediaQuery,
+  Icon
 } from "@chakra-ui/react";
 import Image from "next/image";
 import Link from "next/link";
 import MobileMenu from "../components/nav/MobileMenu";
 import { useRouter } from "next/router";
+import { IoReturnUpBackOutline } from "react-icons/io5";
 
 const Nav = () => {
   const [isMobile] = useMediaQuery("(max-width: 980px)");
@@ -40,6 +42,11 @@ const Nav = () => {
         {!isMobile && (
           <Box alignItems={"center"} my="auto">
             <Connect />
+          </Box>
+        )}
+        {pathname != '/' && isMobile && (
+          <Box justifySelf="left" my="auto" gridColumnStart={"1"} ml='5px' alignItems='center' onClick={router.back}>
+            <Icon as={IoReturnUpBackOutline} w={10} h={10}   color='white' m='auto' />
           </Box>
         )}
         <Box justifySelf={"center"} gridColumnStart="2">

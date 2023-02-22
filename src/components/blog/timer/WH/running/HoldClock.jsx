@@ -17,24 +17,6 @@ export default function HoldClock(props) {
           {props.duration - props.timer}
         </CircularProgressLabel>
       </CircularProgress>
-      {/* <Box
-        m="auto"
-        border="10px white solid"
-        borderRadius={"50%"}
-        boxSize="300px"
-        position={"relative"}
-      >
-        <Text
-          fontSize={"3rem"}
-          m="0"
-          position={"absolute"}
-          top="50%"
-          left="50%"
-          transform={"translate(-50%,-50%)"}
-        >
-          {props.duration - props.timer}
-        </Text>
-      </Box> */}
     </Box>
   );
 }

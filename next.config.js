@@ -4,7 +4,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["firebasestorage.googleapis.com"],
+    domains: [
+      "firebasestorage.googleapis.com",
+      "localhost",
+      "blog-backend-strapi.herokuapp.com",
+    ],
   },
   webpack(config, options) {
     const { isServer } = options;
@@ -13,13 +17,13 @@ const nextConfig = {
       exclude: config.exclude,
       use: [
         {
-          loader: require.resolve('url-loader'),
+          loader: require.resolve("url-loader"),
           options: {
             limit: config.inlineImageLimit,
-            fallback: require.resolve('file-loader'),
+            fallback: require.resolve("file-loader"),
             publicPath: `${config.assetPrefix}/_next/resources/audio/timer/`,
-            outputPath: `${isServer ? '../' : ''}audio/timer/`,
-            name: '[name]-[hash].[ext]',
+            outputPath: `${isServer ? "../" : ""}audio/timer/`,
+            name: "[name]-[hash].[ext]",
             esModule: config.esModule || false,
           },
         },

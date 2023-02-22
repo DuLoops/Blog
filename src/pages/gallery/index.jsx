@@ -20,38 +20,38 @@ export async function getStaticProps() {
 
   return {
     props: { photos },
+    revalidate: false,
   };
 }
 
 const Gallery = (props) => {
-  const [photos, setPhotos] = useState(props.photos);
-  const [filteredPhotos, setFilteredPhotos] = useState([]);
   const [filter, setFilter] = useState("All");
   const [modal, setModal] = useBoolean(false);
   const [showIndex, setShowIndex] = useState(0);
   const [showDetail, setShowDetail] = useBoolean(true);
   const [isMobile] = useMediaQuery("(max-width: 600px)");
 
-  useEffect(() => {
-    if (photos.length != 0) {
-      setFilteredPhotos(
-        photos.filter(
-          (photo) => photo.categories[filter.toLowerCase()] === true
-        )
-      );
+  const filterPhotos = (photos, filter) => {
+    if (filter == "All") {
+      return photos;
     }
-  }, [filter]);
+    return photos.filter(
+      (photo) => photo.categories[filter.toLowerCase()] === true
+    );
+  };
+
+  const filteredPhotos = filterPhotos(props.photos, filter);
 
   return (
     <Box width="100%" overflow={"hidden"} position="relative">
-            <Head>
+      <Head>
         <title>Gallery | DuLoops</title>
       </Head>
       <Nav />
       <ScrollToTopBtn />
       <Box>
         <Filter filter={filter} setFilter={setFilter} />
-        {photos && (
+        {props.photos && (
           <PhotoGrid
             photos={filteredPhotos}
             setShowIndex={setShowIndex}

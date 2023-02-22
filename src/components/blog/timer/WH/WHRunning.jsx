@@ -1,9 +1,10 @@
 import React from "react";
 import { useState, useEffect, useReducer } from "react";
-import { Heading, Text, Box, Flex, HStack } from "@chakra-ui/react";
+import { Heading, Text, Box, Flex, HStack, Icon } from "@chakra-ui/react";
 import Instruction from "./running/Instruction";
 import Clock from "./running/Clock";
 import SoundPlayer from "./running/SoundPlayer";
+import { AiOutlinePause } from "react-icons/ai";
 
 const timerSquence = [
   "ready",
@@ -66,9 +67,17 @@ const WHRunning = (props) => {
       <Box h="200px" position={"relative"}>
         <Instruction sequence={state.sequence} set={state.set} />
       </Box>
-      <Box onClick={handlePause}>
-        <Clock setting={props.setting} state={state} dispatch={dispatch} setCurrentState={props.setCurrentState}/>
-        <SoundPlayer sequence={state.sequence}/>
+      <Box onClick={handlePause} pb='50px'>
+        <Clock
+          setting={props.setting}
+          state={state}
+          dispatch={dispatch}
+          setCurrentState={props.setCurrentState}
+        />
+        <SoundPlayer sequence={state.sequence} />
+        {state.sequence !== "paused" && (
+          <Icon as={AiOutlinePause} boxSize="120px" pos={'absolute'} bottom='0' left='50%' transform={'translate(-50%,0)'}/>
+        )}
       </Box>
     </Flex>
   );

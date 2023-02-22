@@ -1,38 +1,47 @@
 import React, { useEffect, useRef, useState } from "react";
+
+const audioPath = {
+  beginning: "/audio/beginning.mp3",
+  breath: "/audio/breath.mp3",
+  exhale: "/audio/exhale.mp3",
+  hold: "/audio/hold.mp3",
+  inhale: "/audio/inhale.mp3",
+};
 export default function SoundPlayer(props) {
   const audioRef = useRef(null);
-  const [audio, setAudio] = useState(beginning);
+  const [audio, setAudio] = useState(audioPath.beginning);
 
   useEffect(() => {
     switch (props.sequence) {
       case "ready":
-        setAudio('/audio/timer/beginning.mp3');
+        setAudio(audioPath.beginning);
         setTimeout(() => {
           audioRef.current.play();
         }, 2000);
         break;
       case "breath":
-        setAudio('/audio/timer/breath.mp3');
+        setAudio(audioPath.breath);
         break;
       case "exhale":
       case "exhaleLast":
-        setAudio('/audio/timer/exhale.mp3');
+        setAudio(audioPath.exhale);
         break;
       case "hold":
       case "inhaleHold":
-        setAudio('/audio/timer/hold.mp3');
+        setAudio(audioPath.exhale);
         break;
       case "inhale":
-        setAudio('/audio/timer/inhale.mp3');
+        setAudio(audioPath.breath);
+        break;
+      case "paused":
+        if (audioRef.current) audioRef.current.pause();
         break;
     }
   }, [props.sequence]);
 
   useEffect(() => {
-    if (audio != beginning) audioRef.current.play();
+    if (audio != audioPath.beginning) audioRef.current.play();
   }, [audio]);
 
-  return (
-    <audio ref={audioRef} src={audio} />
-  );
+  return <audio ref={audioRef} src={audio} />;
 }

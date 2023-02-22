@@ -7,8 +7,6 @@ import PhotoDetail from "@/components/gallery/PhotoDetail";
 import { useRouter } from "next/router";
 
 const PhotoViewerModal = (props) => {
-  // const gaEventTracker = useAnalyticsEventTracker("gallery-modal");
-
   const swiperRef = useRef();
   const router = useRouter();
   const [url, setUrl] = useState(`${props.photos[props.showIndex].id}`);
@@ -20,9 +18,8 @@ const PhotoViewerModal = (props) => {
 
   useEffect(() => {
     setUrl(props.photos[props.showIndex].id);
-
     if (url) {
-      window.history.pushState({}, '', `/gallery/${url}`);
+      window.history.pushState({}, "", `/gallery/${url}`);
     }
   }, [props.showIndex]);
 

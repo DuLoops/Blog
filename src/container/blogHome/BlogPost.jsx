@@ -9,49 +9,45 @@ import {
   Button,
 } from "@chakra-ui/react";
 import Image from "next/image";
-// import laptop from "@/resources/images/dev/laptop.jpg";
 import { useRouter } from "next/router";
+import { STRAPI_URL } from "@/lib/strapi";
 export default function BlogPost(props) {
   const router = useRouter();
   const handleClick = () => {
-    if (props.post.link.substring(0, 5) == "https") {
-      window.open(props.post.link, "_blank");
-      return;
+    if (props.post.internalLink) {
+      router.push(props.post.link);
     } else {
-      router.push(`/blog/${props.post.link}`);
+      window.open(props.post.link, "_blank");
     }
   };
 
-
-  const getButtonText = () => {
-    switch (props.post.type) {
-      case "software":
-        return "Use App";
-      case "video":
-        return "Watch";
-      default:
-        return "View";
-    }
-  };
+  console.log(
+    "post: " +
+      props.post.title +
+      "\nimage: " +
+      props.post.coverImage.media.data.attributes.url +
+      "\n"
+  );
   return (
-    <Center
+    <Flex
       flexDir="column"
       backgroundColor={"whiteAlpha.100"}
       borderRadius="md"
       gap="5px"
       border="solid 2px rgba(255,255,255,0.1)"
       onClick={handleClick}
+      // maxH="400px"
+      justifyContent="space-between"
+      overflow={"hidden"}
     >
-      {props.post.card.type === "image" && (
-        <Center className="image-container" maxH='40vh'>
-          <Image
-            src={props.post.card.data}
-            alt={props.post.title}
-            fill
-            className="image"
-          />
-        </Center>
-      )}
+      <Center className="image-container" height="250px">
+        <Image
+          src={STRAPI_URL + props.post.coverImage.media.data.attributes.url}
+          alt={props.post.coverImage.media.data.attributes.caption}
+          fill
+          className="image"
+        />
+      </Center>
       <Flex
         w="100%"
         p="10px"
@@ -60,27 +56,25 @@ export default function BlogPost(props) {
         flexDir={"column"}
         gap="10px"
       >
-        <Box>
-          <Heading size="md" float={"left"}>
+        <HStack justifyContent={'space-between'}>
+          <Heading size="md" >
             {props.post.title}
           </Heading>
-          <HStack justifyContent={"flex-end"} float="right">
-            {props.post.tags.map((tag, index) => (
-              <Tag
-               colorScheme={props.tags.filter(t => t.name === tag)[0].color}
-               key={index}>
-                {tag}
+          <HStack justifyContent={"flex-end"} >
+            {props.post.blog_tags.data.map((tag, index) => (
+              <Tag colorScheme={tag.attributes.color} key={index}>
+                {tag.attributes.name}
               </Tag>
             ))}
           </HStack>
-        </Box>
+        </HStack>
         <Text fontSize={"sm"} fontStyle="italic" ml="10px">
           {props.post.description.slice(0, 43)} ...
         </Text>
         <Button size="sm" w="50%" mx="auto">
-          {getButtonText()}
+          View
         </Button>
       </Flex>
-    </Center>
+    </Flex>
   );
 }

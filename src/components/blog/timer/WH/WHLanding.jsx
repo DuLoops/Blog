@@ -16,7 +16,7 @@ export default function WHLanding(props) {
     <Box textAlign={"center"} mt="20px">
       <Heading>Wim Hof</Heading>
       <Heading>Breathing Timer</Heading>
-      <VStack gap={"20px"} mt="30px">
+      <VStack gap={"20px"} my="30px">
         <HStack className="main">
           <WHInfoModal />
           <Button>
@@ -32,6 +32,7 @@ export default function WHLanding(props) {
       </VStack>
       <Button
         mt="20px"
+        mb='50px'
         onClick={() => {
           props.setCurrentState("running");
         }}

@@ -1,6 +1,7 @@
 import {HStack, Tag, Text } from "@chakra-ui/react";
 
 const Filter = (props) => {
+
   return (
     <HStack m={"10px"}  justifyContent='center'>
       <Text>Tags filter: </Text>
@@ -8,22 +9,22 @@ const Filter = (props) => {
         <Tag
           key={index}
           colorScheme={
-            props.selectedTags.find((selectedTag) => selectedTag == tag.name)
-              ? tag.color
+            props.selectedTags.find((selectedTag) => selectedTag == tag.id)
+              ? tag.attributes.color
               : "gray"
           }
           onClick={() => {
             props.setSelectedTags(
-              props.selectedTags.includes(tag.name)
+              props.selectedTags.includes(tag.id)
                 ? props.selectedTags.filter(
-                    (selectedTag) => selectedTag !== tag.name
+                    (selectedTag) => selectedTag !== tag.id
                   )
-                : [...props.selectedTags, tag.name]
+                : [...props.selectedTags, tag.id]
             );
           }}
           cursor="pointer"
         >
-          {tag.name}
+          {tag.attributes.name}
         </Tag>
       ))}
     </HStack>
