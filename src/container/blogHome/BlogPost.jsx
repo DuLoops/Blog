@@ -15,7 +15,10 @@ export default function BlogPost(props) {
   const router = useRouter();
   const handleClick = () => {
     if (props.post.internalLink) {
-      const newPath = props.post.link;
+      let newPath = props.post.link;
+      if (props.postID) {
+        newPath += `?id=${props.postID}`;
+      }
       const currentPath = router.asPath;
       if (newPath !== currentPath) {
         router.push(newPath);
@@ -37,7 +40,7 @@ export default function BlogPost(props) {
       justifyContent="space-between"
       overflow={"hidden"}
     >
-      <Center className="image-container" height="250px">
+      <Center className="image-container" maxHeight="300px">
         <Image
           src={STRAPI_URL + props.post.coverImage.media.data.attributes.url}
           alt={props.post.coverImage.media.data.attributes.caption}

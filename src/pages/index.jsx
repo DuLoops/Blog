@@ -19,12 +19,13 @@ const Blog = ({ blogPostsProp, blogTagsProp }) => {
   const [blogPosts, setBlogPosts] = useState(blogPostsProp);
   const [selectedTags, setSelectedTags] = useState([]);
 
-  
-
   const filterPosts = (blogPosts, selectedTags) => {
     let sortedPosts = [...blogPosts];
     sortedPosts.sort((a, b) => {
-      return new Date(b.attributes.modifiedDate) - new Date(a.attributes.modifiedDate);
+      return (
+        new Date(b.attributes.modifiedDate) -
+        new Date(a.attributes.modifiedDate)
+      );
     });
 
     if (selectedTags.length === 0) {
@@ -56,7 +57,7 @@ const Blog = ({ blogPostsProp, blogTagsProp }) => {
       <Grid p="10px" gap="10px" gridTemplateColumns={{ lg: "1fr 1fr" }}>
         {blogPosts.length > 0 &&
           filteredPosts.map((post, index) => (
-            <BlogPost key={index} post={post.attributes} />
+            <BlogPost key={index} post={post.attributes} postID={post.id} />
           ))}
       </Grid>
       {isMobile && <BottomNav current="blog" />}
@@ -68,6 +69,7 @@ const GET_QUERY = gql`
   query getBlogPostsAndTags {
     blogPosts {
       data {
+        id
         attributes {
           title
           description

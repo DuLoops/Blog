@@ -1,15 +1,31 @@
 import client from "@/lib/apollo";
 import { gql } from "@apollo/client";
-import { Box, Flex, Heading, Tag, Text, Divider } from "@chakra-ui/react";
+import { Box, Flex, Heading, Spinner } from "@chakra-ui/react";
 import Nav from "@/container/Nav";
 import ReactMarkdown from "react-markdown";
 import Head from "next/head";
 import Image from "next/image";
 import { STRAPI_URL } from "@/lib/strapi";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
+import { useQuery } from "@apollo/client";
 
-const Blog = ({ blogProp }) => {
-  const blogInfo = blogProp.blog_post.data.attributes;
+const GET_BLOG = gql`
+  query GetBLog($id: ID!) {
+    blog(id: $id) {
+      data {
+        attributes {
+          content
+        }
+      }
+    }
+  }
+`;
+
+const Blog = ({ blogPostProp }) => {
+  const { data, loading, error } = useQuery(GET_BLOG, {
+    variables: { id: blogPostProp.contentID },
+  });
+
   return (
     <Box>
       <Head>
@@ -18,46 +34,45 @@ const Blog = ({ blogProp }) => {
       <Nav />
       <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
         <Heading m="1rem" size="2xl">
-          {blogInfo.title}
+          {blogPostProp.title}
         </Heading>
         <Heading as="h2" size="md">
-          {blogInfo.description}
+          {blogPostProp.description}
         </Heading>
-        <Image
-          src={STRAPI_URL + blogInfo.coverImage.media.data.attributes.url}
-          alt={blogInfo.coverImage.alt}
-          fill
-          className="image"
-        />
-
-        <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
-          {blogProp.content}
-        </ReactMarkdown>
+        <Box width={{ sm: "100%", lg: "60%" }} alignSelf={"center"} m="2rem">
+          <Image
+            src={STRAPI_URL + blogPostProp.coverImage.media.data.attributes.url}
+            alt={blogPostProp.coverImage.alt}
+            fill
+            className="image"
+          />
+        </Box>
+        {loading && <Spinner size="xl" alignSelf={"center"} />}
+        {data && (
+          <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
+            {data.blog.data.attributes.content}
+          </ReactMarkdown>
+        )}
+        {error && <p>Error loading content. Sorry.</p>}
       </Flex>
     </Box>
   );
 };
 
-const GET_BLOG = gql`
-  query GetBLog($id: ID!) {
-    blog(id: $id) {
+const GET_BLOG_POST = gql`
+  query GetBlogPost($id: ID!) {
+    blogPost(id: $id) {
       data {
         attributes {
-          content
-          blog_post {
-            data {
-              attributes {
-                title
-                description
-                coverImage {
-                  alt
-                  media {
-                    data {
-                      attributes {
-                        url
-                      }
-                    }
-                  }
+          title
+          description
+          contentID
+          coverImage {
+            alt
+            media {
+              data {
+                attributes {
+                  url
                 }
               }
             }
@@ -71,7 +86,7 @@ const GET_BLOG = gql`
 export async function getServerSideProps(context) {
   const { id } = context.query;
   const { error, data } = await client.query({
-    query: GET_BLOG,
+    query: GET_BLOG_POST,
     variables: { id: id },
   });
 
@@ -83,7 +98,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       id: id,
-      blogProp: data.blog.data.attributes,
+      blogPostProp: data.blogPost.data.attributes,
     },
   };
 }
