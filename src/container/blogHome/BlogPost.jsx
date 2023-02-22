@@ -21,13 +21,6 @@ export default function BlogPost(props) {
     }
   };
 
-  console.log(
-    "post: " +
-      props.post.title +
-      "\nimage: " +
-      props.post.coverImage.media.data.attributes.url +
-      "\n"
-  );
   return (
     <Flex
       flexDir="column"

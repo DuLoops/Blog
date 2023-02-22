@@ -35,8 +35,8 @@ const CodingChallenge = ({ challengeData }) => {
           <br />
           <br />
           Type:{" "}
-          {challengeData.tags.data.map((tag) => (
-            <Tag color={tag.attributes.color}>{tag.attributes.type}</Tag>
+          {challengeData.tags.data.map((tag, index) => (
+            <Tag key={index} color={tag.attributes.color}>{tag.attributes.type}</Tag>
           ))}
         </Text>
         <Divider />
