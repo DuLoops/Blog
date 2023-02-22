@@ -78,7 +78,7 @@ export default function About() {
             {" "}
             {purpose[purposeIndex].name}
           </Text>
-          &apos
+          &apos;
         </Flex>
         <Icon as={purpose[purposeIndex].icon} w="150px" h="150px" />
       </Flex>
