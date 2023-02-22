@@ -51,9 +51,7 @@ const Blog = () => {
   if (data) {
     blogPost = data.blog.data.attributes.blog_post.data.attributes;
   }
-  if (loading) {
-    return <LoadingScreen title="Blog" />;
-  }
+
   return (
     <Box>
       <Head>
@@ -63,6 +61,7 @@ const Blog = () => {
       {error && (
         <Heading textAlign={"center"}>Error loading content. Sorry.</Heading>
       )}
+      {loading && <LoadingScreen />}
       {data && blogPost && (
         <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
           <Heading my="1rem" size="2xl">

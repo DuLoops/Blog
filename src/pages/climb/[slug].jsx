@@ -33,7 +33,7 @@ const ClimbBlog = () => {
   });
   let climbData = null;
   if (loading) {
-    return <LoadingScreen title="Climb" />;
+    return <LoadingScreen />;
   }
   if (data) {
     climbData = data.climb.data.attributes;
@@ -45,6 +45,7 @@ const ClimbBlog = () => {
       </Head>
       <Nav />
       {error && <Text>Cannot load the climb at the moment.</Text>}
+      {loading && <LoadingScreen />}
       {climbData && (
         <Box>
           <Heading>{climbData.name}</Heading>

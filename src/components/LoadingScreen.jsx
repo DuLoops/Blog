@@ -1,12 +1,10 @@
 import { Box, Heading, SkeletonCircle, SkeletonText } from "@chakra-ui/react";
 
-const LoadingScreen = (props) => {
+const LoadingScreen = () => {
   return (
-    <Box padding="5rem" boxShadow="lg">
-      <Heading my='3rem' textAlign={'center'}>{props.title}</Heading>
-      <SkeletonText mt="4" noOfLines={4} spacing="4" skeletonHeight="2" />
-      <SkeletonText mt="5rem" noOfLines={4} spacing="4" skeletonHeight="2" />
-
+    <Box padding="10vw" boxShadow="lg">
+      <SkeletonText mt="4" noOfLines={4} spacing={{sm:3, lg: 10}} skeletonHeight={{sm:3, lg: 7}}  />
+      <SkeletonText mt={{sm:"50px", lg: '150px'}} noOfLines={4} spacing={{sm:3, lg: 10}}  skeletonHeight={{sm:3, lg: 7}}  />
     </Box>
   );
 };

@@ -68,15 +68,14 @@ const CodingChallenge = () => {
     challengeData = data.codingChallenge.data.attributes;
     blogPost = data.codingChallenge.data.attributes.blog_post.data.attributes;
   }
-  if (loading) {
-    return <LoadingScreen title="Coding Challenge" />;
-  }
+
   return (
     <Box>
       <Head>
         <title>Coding-Challenge | DuLoops</title>
       </Head>
       <Nav />
+      {loading && <LoadingScreen />}
       {error && <p>Error loading content. Sorry.</p>}
       {data && (
         <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">
