@@ -1,14 +1,6 @@
 import client from "@/lib/apollo";
 import { gql } from "@apollo/client";
-import {
-  Box,
-  Flex,
-  Heading,
-  Tag,
-  Text,
-  Divider,
-  Spinner,
-} from "@chakra-ui/react";
+import { Box, Flex, Heading, Tag, Text, Divider } from "@chakra-ui/react";
 import Nav from "@/container/Nav";
 import { ReactMarkdown } from "react-markdown/lib/react-markdown";
 import Head from "next/head";
@@ -18,6 +10,7 @@ import { STRAPI_URL } from "@/lib/strapi";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import LoadingScreen from "@/components/LoadingScreen";
 
 const GET_CHALLENGE = gql`
   query getCodingChallenge($id: ID!) {
@@ -75,14 +68,15 @@ const CodingChallenge = () => {
     challengeData = data.codingChallenge.data.attributes;
     blogPost = data.codingChallenge.data.attributes.blog_post.data.attributes;
   }
-
+  if (loading) {
+    return <LoadingScreen title="Coding Challenge" />;
+  }
   return (
     <Box>
       <Head>
         <title>Coding-Challenge | DuLoops</title>
       </Head>
       <Nav />
-      {loading && <Spinner size="xl" className="center" />}
       {error && <p>Error loading content. Sorry.</p>}
       {data && (
         <Flex w="80%" m="auto" my="1rem" flexDir="column" gap="1rem" mb="50px">

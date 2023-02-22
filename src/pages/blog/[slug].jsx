@@ -9,6 +9,7 @@ import { STRAPI_URL } from "@/lib/strapi";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import LoadingScreen from "../../components/LoadingScreen";
 
 const GET_BLOG = gql`
   query GetBLog {
@@ -46,10 +47,12 @@ const Blog = () => {
   const { data, loading, error } = useQuery(GET_BLOG, {
     variables: { id: id },
   });
-  console.log(error);
   let blogPost;
   if (data) {
     blogPost = data.blog.data.attributes.blog_post.data.attributes;
+  }
+  if (loading) {
+    return <LoadingScreen title="Blog" />;
   }
   return (
     <Box>
@@ -57,7 +60,6 @@ const Blog = () => {
         <title>Blog | DuLoops</title>
       </Head>
       <Nav />
-      {loading && <Spinner size="xl" alignSelf={"center"} />}
       {error && (
         <Heading textAlign={"center"}>Error loading content. Sorry.</Heading>
       )}

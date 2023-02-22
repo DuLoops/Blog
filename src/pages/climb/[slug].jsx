@@ -1,4 +1,4 @@
-import { Box, Heading, Text, Spinner } from "@chakra-ui/react";
+import { Box, Heading, Text } from "@chakra-ui/react";
 import client from "@/lib/apollo";
 import { gql } from "@apollo/client";
 import Head from "next/head";
@@ -6,6 +6,8 @@ import Nav from "@/container/Nav";
 import ReactMarkdown from "react-markdown";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useQuery } from "@apollo/client";
+import LoadingScreen from "../../components/LoadingScreen";
+import { useRouter } from "next/router";
 
 const GET_CLIMB = gql`
   query GetClimb($id: ID!) {
@@ -23,28 +25,25 @@ const GET_CLIMB = gql`
   }
 `;
 
-const ClimbBlog = ({ contentID }) => {
+const ClimbBlog = () => {
+  const rounter = useRouter();
+  const { id } = rounter.query;
   const { data, loading, error } = useQuery(GET_CLIMB, {
-    variables: { id: contentID },
+    variables: { id: id },
   });
   let climbData = null;
-  if (data) climbData = data.climb.data.attributes;
-
+  if (loading) {
+    return <LoadingScreen title="Climb" />;
+  }
+  if (data) {
+    climbData = data.climb.data.attributes;
+  }
   return (
     <Box textAlign={"center"}>
       <Head>
         <title>Climb | DuLoops</title>
       </Head>
       <Nav />
-      {loading && (
-        <Spinner
-          pos={"absolute"}
-          size="xl"
-          top="50vh"
-          left="50vw"
-          transform={"translate('-50%,-50%')"}
-        />
-      )}
       {error && <Text>Cannot load the climb at the moment.</Text>}
       {climbData && (
         <Box>
@@ -77,38 +76,5 @@ const ClimbBlog = ({ contentID }) => {
     </Box>
   );
 };
-
-const GET_BLOG_POST = gql`
-  query GetBlogPost($id: ID!) {
-    blogPost(id: $id) {
-      data {
-        attributes {
-          contentID
-        }
-      }
-    }
-  }
-`;
-
-export async function getServerSideProps(context) {
-  const { id } = context.query;
-  const { error, data } = await client.query({
-    query: GET_BLOG_POST,
-    variables: {
-      id: id,
-    },
-  });
-
-  if (error) {
-    return {
-      notFound: true,
-    };
-  }
-  return {
-    props: {
-      contentID: data.blogPost.data.attributes.contentID,
-    },
-  };
-}
 
 export default ClimbBlog;
