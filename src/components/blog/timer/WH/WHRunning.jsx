@@ -20,7 +20,7 @@ const reducer = (state, action) => {
     case "next":
       let index = state.timerSequenceIndex + 1;
       if (index === timerSquence.length) {
-        state.set++;
+      state.set++;
         index = 0;
       }
       return {

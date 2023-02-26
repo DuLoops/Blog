@@ -32,9 +32,6 @@ const Gallery = (props) => {
   const [isMobile] = useMediaQuery("(max-width: 600px)");
 
   const filterPhotos = (photos, filter) => {
-    if (filter == "All") {
-      return photos;
-    }
     return photos.filter(
       (photo) => photo.categories[filter.toLowerCase()] === true
     );
