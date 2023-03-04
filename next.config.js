@@ -8,6 +8,7 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
       "localhost",
       "blog-backend-strapi.herokuapp.com",
+      "res.cloudinary.com",
     ],
   },
   webpack(config, options) {

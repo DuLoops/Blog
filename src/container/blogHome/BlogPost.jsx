@@ -10,7 +10,6 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import { STRAPI_URL } from "@/lib/strapi";
 export default function BlogPost(props) {
   const router = useRouter();
   const handleClick = () => {
@@ -57,7 +56,7 @@ export default function BlogPost(props) {
     >
       <Center className="image-container" height="300px" maxW={"100%"}>
         <Image
-          src={STRAPI_URL + props.post.coverImage.media.data.attributes.url}
+          src={props.post.coverImage.media.data.attributes.url}
           alt={props.post.coverImage.media.data.attributes.caption}
           fill
           className="image"
