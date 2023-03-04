@@ -5,7 +5,6 @@ import Nav from "@/container/Nav";
 import ReactMarkdown from "react-markdown";
 import Head from "next/head";
 import Image from "next/image";
-import { STRAPI_URL } from "@/lib/strapi";
 import ChakraUIRenderer from "chakra-ui-markdown-renderer";
 import { useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
@@ -72,7 +71,7 @@ const Blog = () => {
           </Heading>
           <Box width={{ sm: "100%", lg: "60%" }} alignSelf={"center"} m="2rem">
             <Image
-              src={STRAPI_URL + blogPost.coverImage.media.data.attributes.url}
+              src={blogPost.coverImage.media.data.attributes.url}
               alt={blogPost.coverImage.alt}
               fill
               className="image"
