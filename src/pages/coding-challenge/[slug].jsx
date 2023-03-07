@@ -107,17 +107,17 @@ const CodingChallenge = () => {
               ))}
             </Text>
             <Divider my="1rem" />
-            <Heading as={"h3"}>Problem</Heading>
+            <Heading as={"h1"} color='red.300'>Problem</Heading>
             <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
               {challengeData.problem}
             </ReactMarkdown>
             <Divider my="1rem" />
-            <Heading as={"h3"}>Solution</Heading>
+            <Heading as={"h1"} color='orange.300'>Solution</Heading>
             <ReactMarkdown components={ChakraUIRenderer()} skipHtml>
               {challengeData.solution}
             </ReactMarkdown>
             <Divider my="1rem" />
-            <Heading as={"h3"}>Code</Heading>
+            <Heading as={"h3"} color='green.300'>Code</Heading>
             <Text>Language: {challengeData.codeLanguage}</Text>
             <ReactSyntaxHighlighter language={challengeData.codeLanguage}>
               {challengeData.code}

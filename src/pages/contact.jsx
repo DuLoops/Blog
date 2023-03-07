@@ -10,7 +10,7 @@ const Contact = () => {
         <title>Contact| DuLoops</title>
       </Head>
       <Nav />
-      <Center my="auto" h="100%">
+      <Center height='80vh' h="100%">
         <ContactForm />
       </Center>
     </Box>
